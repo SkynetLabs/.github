@@ -7,10 +7,10 @@ assignees: ''
 
 ---
 
-**Describe the bug**
+## Describe the bug
 <!-- A clear and concise description of what the bug is. -->
 
-**To Reproduce**
+## To Reproduce
 <!-- 
 Steps to reproduce the behavior:
 1. Go to '...'
@@ -19,18 +19,18 @@ Steps to reproduce the behavior:
 4. See error 
 -->
 
-**Expected behavior**
+## Expected behavior
 <!-- A clear and concise description of what you expected to happen. -->
 
-**Screenshots**
+## Screenshots
 <!-- If applicable, add screenshots to help explain your problem. -->
 
-**Version Information (please complete the following information):**
+## Version Information (please complete the following information):
  <!-- 
  - OS: [e.g. iOS]
  - Browser [e.g. chrome, safari]
  - Git Commit or Git Tag [e.g. 22] 
 -->
 
-**Additional context**
+## Additional context
 <!-- Add any other context about the problem here. -->
