@@ -1,0 +1,22 @@
+# Define action name, description, and inputs
+name: "Prettier Lint"
+description: "Lint code with Prettier using yarn"
+inputs:
+  working-directory:
+    required: false
+    description: "Working directory"
+    default: "."
+
+# Define action steps
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16.x
+    - run: yarn
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+    - run: yarn prettier --check .
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
