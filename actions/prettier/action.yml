@@ -1,6 +1,6 @@
 # Define action name, description, and inputs
-name: "JS Lint"
-description: "Lint code with Prettier and eslint"
+name: "Prettier Lint"
+description: "Lint code with Prettier using yarn"
 inputs:
   working-directory:
     required: false
@@ -18,13 +18,5 @@ runs:
       shell: bash
       working-directory: ${{ inputs.working-directory }}
     - run: yarn prettier --check .
-      shell: bash
-      working-directory: ${{ inputs.working-directory }}
-    - if: inputs.working-directory == 'packages/dashboard'
-      run: yarn next lint
-      shell: bash
-      working-directory: ${{ inputs.working-directory }}
-    - if: inputs.working-directory == 'packages/dashboard-v2'
-      run: yarn lint
       shell: bash
       working-directory: ${{ inputs.working-directory }}
