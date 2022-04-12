@@ -1,7 +1,7 @@
 # Auto-merge Dependabot PRs. Requires also `.github/.kodiak.toml`.
 # See https://hackmd.io/@SkynetLabs/ryFfInNXc.
 
-name: "Dependabot Approve and Merge"
+name: "Approve and Merge Dependabot PRs"
 description: "Automatically approves and enables auto-merge for Dependabot PRs"
 
 runs:
@@ -14,11 +14,13 @@ runs:
         github-token: "${{ secrets.GITHUB_TOKEN }}"
     - name: Approve PR
       run: gh pr review --approve "$PR_URL"
+      shell: bash
       env:
         PR_URL: ${{ github.event.pull_request.html_url }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Enable auto-merge for Dependabot PRs
       run: gh pr merge --auto --merge "$PR_URL"
+      shell: bash
       env:
         PR_URL: ${{ github.event.pull_request.html_url }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -17,6 +17,10 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
     - run: npm install
+      shell: bash
     - run: npx prettier --check .
+      shell: bash
     - run: npm run lint
+      shell: bash
     - run: npm run test
+      shell: bash
