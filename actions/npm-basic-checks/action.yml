@@ -1,0 +1,22 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of Node.
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: "Basic Checks and Tests"
+description: "Perform basic checks and tests for an NPM project"
+inputs:
+  node-version:
+    required: true
+    description: "the node version"
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ inputs.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ inputs.node-version }}
+    - run: npm install
+    - run: npx prettier --check .
+    - run: npm run lint
+    - run: npm run test
