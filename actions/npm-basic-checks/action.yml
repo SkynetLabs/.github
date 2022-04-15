@@ -18,7 +18,7 @@ runs:
         node-version: ${{ inputs.node-version }}
     - run: npm ci
       shell: bash
-    - run: npx prettier --check .
+    - run: npx --no-install prettier --check .
       shell: bash
     - run: npm run lint
       shell: bash
