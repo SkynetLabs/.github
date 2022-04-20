@@ -52,3 +52,4 @@ jobs:
         uses: ./.github/actions/version-release
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
+          version-bump: ${{inputs.version}}
