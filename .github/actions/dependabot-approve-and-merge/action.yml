@@ -7,6 +7,7 @@ description: "Automatically approves and enables auto-merge for Dependabot PRs"
 runs:
   using: "composite"
   steps:
+    - uses: actions/checkout@v3
     - name: Dependabot metadata
       id: metadata
       uses: dependabot/fetch-metadata@v1.3.0
