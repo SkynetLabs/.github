@@ -2,7 +2,7 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
 name: "Basic Checks and Tests"
-description: "Perform basic checks and tests for an NPM project"
+description: "Perform basic checks and tests for a yarn project"
 inputs:
   node-version:
     required: true
@@ -16,11 +16,12 @@ runs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ inputs.node-version }}
-    - run: npm ci
+    # Yarn equivalent of npm ci.
+    - run: yarn install --frozen-lockfile
       shell: bash
-    - run: npx --no-install prettier --check .
+    - run: yarn prettier --check .
       shell: bash
-    - run: npm run lint
+    - run: yarn lint
       shell: bash
-    - run: npm run test
+    - run: yarn test
       shell: bash
