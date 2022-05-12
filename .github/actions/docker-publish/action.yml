@@ -43,4 +43,4 @@ runs:
       with:
         context: .
         push: true
-        tags: ${{ steps.docker_version.outputs.latest_image_tag }}, ${{ steps.docker_version.outputs.semver_version_image_tag }}, ${{ steps.docker_version.outputs.major_minor_version_image_tag }}
+        tags: ${{ steps.docker_version.outputs.latest_image_tag }}, ${{ steps.docker_version.outputs.semver_version_image_tag }}, ${{ steps.docker_version.outputs.major_minor_version_image_tag }}, ${{ steps.docker_version.outputs.major_version_image_tag }}

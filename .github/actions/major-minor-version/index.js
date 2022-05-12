@@ -41,4 +41,14 @@ const github = require("@actions/github");
     "major_minor_version_image_tag",
     `${dockerRepo}:${majorMinor}`
   );
+
+  // Drop the minor version
+  verionArray.pop();
+
+  // Rebuild major version
+  let major = verionArray.join(".");
+  console.log(`Major semver version ${major}`);
+
+  // Set major_version_image_tag output
+  core.setOutput("major_version_image_tag", `${dockerRepo}:${major}`);
 })();
