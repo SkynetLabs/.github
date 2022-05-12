@@ -8,6 +8,10 @@ inputs:
     required: false
     description: "major, minor, or patch version bump"
     default: "patch"
+outputs:
+  new-version:
+    description: "new version created"
+    value: ${{ steps.tag_version.outputs.new_version }}
 
 runs:
   using: "composite"
@@ -17,7 +21,7 @@ runs:
       uses: mathieudutour/github-tag-action@v6.0
       with:
         github_token: ${{ inputs.github-token }}
-        default_bump: ${{ inputs.version-bump }}
+
     - name: Create a GitHub release
       uses: ncipollo/release-action@v1
       with:
