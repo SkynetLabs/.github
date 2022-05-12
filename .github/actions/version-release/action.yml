@@ -8,6 +8,10 @@ inputs:
     required: false
     description: "major, minor, or patch version bump"
     default: "patch"
+outputs:
+  new-version:
+    description: "new version created"
+    value: ${{ steps.tag_version.outputs.new_version }}
 
 runs:
   using: "composite"
