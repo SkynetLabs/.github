@@ -1,5 +1,9 @@
 name: "Publish Image to Docker Hub"
-description: "Build and push docker image to docker hub"
+description: |
+  Build and push the latest docker image to docker hub.
+  Three images will be pushed, `latest` and two semver images.
+  One will be the full semver image (major.minor.patch).
+  The second will be just the major.minor version.
 inputs:
   docker_username:
     required: true
@@ -7,9 +11,12 @@ inputs:
   docker_password:
     required: true
     description: "secrets.DOCKER_PASSWORD"
-  tags:
+  docker_repository:
     required: true
-    description: "comma separate string of tags to push"
+    description: "name of the docker repository"
+  semver_version:
+    required: true
+    description: "The semver version to release (vX.X.X)"
 
 # Define action steps
 runs:
@@ -24,9 +31,16 @@ runs:
         username: ${{ inputs.docker_username }}
         password: ${{ inputs.docker_password }}
 
+    - name: Generate Docker Versions
+      id: docker_version
+      uses: ./.github/actions/major-minor-version
+      with:
+        version: ${{ inputs.semver_version }}
+        docker_repository: ${{ inputs.docker_repository }}
+
     - name: Build and push Docker image
       uses: docker/build-push-action@v3
       with:
         context: .
         push: true
-        tags: ${{ inputs.tags }}
+        tags: ${{ steps.docker_version.outputs.latest_image_tag }}, ${{ steps.docker_version.outputs.semver_version_image_tag }}, ${{ steps.docker_version.outputs.major_minor_version_image_tag }}
