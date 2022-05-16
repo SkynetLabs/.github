@@ -16,7 +16,6 @@ runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v3
-      working-directory: ${{ inputs.working-directory }}
     - name: Use Node.js ${{ inputs.node-version }}
       working-directory: ${{ inputs.working-directory }}
       uses: actions/setup-node@v3
