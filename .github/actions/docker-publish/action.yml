@@ -14,7 +14,7 @@ inputs:
   docker_context:
     required: false
     description: "name of the docker repository"
-    default: "."
+    default: ""
   docker_repository:
     required: true
     description: "name of the docker repository"
@@ -47,7 +47,7 @@ runs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v3
       with:
-        context: "{{ defaultContext }}:packages/health-check/Dockerfile"
+        context: "{{ defaultContext }}:${{ inputs.docker_context }}"
         push: true
         tags: |
           ${{ steps.docker_version.outputs.latest_image_tag }}
