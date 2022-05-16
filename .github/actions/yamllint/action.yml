@@ -12,7 +12,6 @@ runs:
   using: "composite"
   steps:
     - uses: actions/setup-python@v2
-      working-directory: ${{ inputs.working-directory }}
       with:
         python-version: "3.x"
         architecture: x64

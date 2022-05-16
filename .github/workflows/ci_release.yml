@@ -1,9 +1,9 @@
 name: CI and Release
 on:
   push:
-  schedule:
-    # Run daily at 1:15am
-    - cron: "15 1 * * *"
+  # schedule:
+  #   # Run daily at 1:15am
+  #   - cron: "15 1 * * *"
   workflow_dispatch:
     # Inputs the workflow accepts.
     inputs:
@@ -52,4 +52,4 @@ jobs:
         uses: ./.github/actions/version-release
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
-          version-bump: ${{inputs.version}}
+          version-bump: ${{github.event.inputs.version}}
