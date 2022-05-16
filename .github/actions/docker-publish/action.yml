@@ -47,7 +47,7 @@ runs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v3
       with:
-        context: "{{ defaultContext }}:packages/health-check"
+        context: "{{ defaultContext }}:packages/health-check/Dockerfile"
         push: true
         tags: |
           ${{ steps.docker_version.outputs.latest_image_tag }}
