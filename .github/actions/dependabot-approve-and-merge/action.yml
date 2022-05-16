@@ -7,23 +7,31 @@ inputs:
   github-token:
     required: true
     description: "your GITHUB_TOKEN"
+  working-directory:
+    required: false
+    description: "Working directory"
+    default: "."
 
 runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v3
+      working-directory: ${{ inputs.working-directory }}
     - name: Dependabot metadata
+      working-directory: ${{ inputs.working-directory }}
       id: metadata
       uses: dependabot/fetch-metadata@v1.3.0
       with:
         github-token: ${{ inputs.github-token }}
     - name: Approve PR
+      working-directory: ${{ inputs.working-directory }}
       run: gh pr review --approve "$PR_URL"
       shell: bash
       env:
         PR_URL: ${{ github.event.pull_request.html_url }}
         GITHUB_TOKEN: ${{ inputs.github-token }}
     - name: Enable auto-merge for Dependabot PRs
+      working-directory: ${{ inputs.working-directory }}
       run: gh pr merge --auto --merge "$PR_URL"
       shell: bash
       env:

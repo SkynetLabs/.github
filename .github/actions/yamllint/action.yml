@@ -1,17 +1,25 @@
 # Define action name, description, and inputs
 name: "Yamllint"
 description: "Lint yaml code with yamllint"
+inputs:
+  working-directory:
+    required: false
+    description: "Working directory"
+    default: "."
 
 # Define action steps
 runs:
   using: "composite"
   steps:
     - uses: actions/setup-python@v2
+      working-directory: ${{ inputs.working-directory }}
       with:
         python-version: "3.x"
         architecture: x64
 
     - run: pip install yamllint
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
     - run: yamllint --no-warnings .
       shell: bash
+      working-directory: ${{ inputs.working-directory }}

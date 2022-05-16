@@ -7,21 +7,31 @@ inputs:
   node-version:
     required: true
     description: "the node version"
+  working-directory:
+    required: false
+    description: "Working directory"
+    default: "."
 
 runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v3
+      working-directory: ${{ inputs.working-directory }}
     - name: Use Node.js ${{ inputs.node-version }}
+      working-directory: ${{ inputs.working-directory }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ inputs.node-version }}
     # Yarn equivalent of npm ci.
     - run: yarn install --frozen-lockfile
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
     - run: yarn prettier --check .
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
     - run: yarn lint
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
     - run: yarn test
       shell: bash
+      working-directory: ${{ inputs.working-directory }}

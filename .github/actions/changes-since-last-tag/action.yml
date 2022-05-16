@@ -12,6 +12,7 @@ runs:
   using: "composite"
   steps:
     - name: "Get Previous tag"
+      working-directory: ${{ inputs.working-directory }}
       id: previoustag
       uses: "WyriHaximus/github-action-get-previous-tag@v1"
       with:
@@ -19,6 +20,7 @@ runs:
     # Use paths-filter to determine which paths have changes
     # https://github.com/dorny/paths-filter
     - uses: dorny/paths-filter@v2
+      working-directory: ${{ inputs.working-directory }}
       id: changes
       with:
         base: ${{ steps.previoustag.outputs.tag }}

@@ -12,6 +12,7 @@ runs:
   using: "composite"
   steps:
     - uses: actions/setup-node@v3
+      working-directory: ${{ inputs.working-directory }}
       with:
         node-version: 16.x
     - run: yarn
