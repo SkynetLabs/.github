@@ -13,7 +13,7 @@ inputs:
 outputs:
   latest_image_tag:
     description: "The latest docker image tag"
-  majorr_version_image_tag:
+  major_version_image_tag:
     description: "The major semver docker image version tag X"
   major_minor_version_image_tag:
     description: "The major minor semver docker image version tag X.X"
