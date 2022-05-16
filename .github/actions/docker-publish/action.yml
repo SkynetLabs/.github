@@ -11,6 +11,10 @@ inputs:
   docker_password:
     required: true
     description: "secrets.DOCKER_PASSWORD"
+  docker_context:
+    required: false
+    description: "name of the docker repository"
+    default: "."
   docker_repository:
     required: true
     description: "name of the docker repository"
@@ -41,6 +45,10 @@ runs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v3
       with:
-        context: .
+        context: ${{ inputs.docker_context }}
         push: true
-        tags: ${{ steps.docker_version.outputs.latest_image_tag }}, ${{ steps.docker_version.outputs.semver_version_image_tag }}, ${{ steps.docker_version.outputs.major_minor_version_image_tag }}, ${{ steps.docker_version.outputs.major_version_image_tag }}
+        tags: |
+          ${{ steps.docker_version.outputs.latest_image_tag }}
+          ${{ steps.docker_version.outputs.semver_version_image_tag }}
+          ${{ steps.docker_version.outputs.major_minor_version_image_tag }}
+          ${{ steps.docker_version.outputs.major_version_image_tag }}

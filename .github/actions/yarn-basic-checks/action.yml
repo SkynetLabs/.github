@@ -15,11 +15,14 @@ inputs:
 runs:
   using: "composite"
   steps:
+    # Action level setup steps
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ inputs.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ inputs.node-version }}
+
+    # Directory level tasks
     # Yarn equivalent of npm ci.
     - run: yarn install --frozen-lockfile
       shell: bash

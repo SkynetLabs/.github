@@ -11,10 +11,12 @@ inputs:
 runs:
   using: "composite"
   steps:
+    # Action level setup steps
     - uses: actions/setup-node@v3
-      working-directory: ${{ inputs.working-directory }}
       with:
         node-version: 16.x
+
+    # Directory level tasks
     - run: yarn
       shell: bash
       working-directory: ${{ inputs.working-directory }}
