@@ -1,9 +1,10 @@
 name: "Publish Image to Docker Hub"
 description: |
   Build and push the latest docker image to docker hub.
-  Three images will be pushed, `latest` and two semver images.
+  Four images will be pushed, `latest` and three semver images.
   One will be the full semver image (major.minor.patch).
-  The second will be just the major.minor version.
+  The second will be the major.minor version.
+  Third one will be just the major version.
 inputs:
   docker_username:
     required: true
