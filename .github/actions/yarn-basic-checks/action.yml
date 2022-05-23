@@ -23,5 +23,7 @@ runs:
       shell: bash
     - run: yarn lint
       shell: bash
+    - run: yarn build
+      shell: bash
     - run: yarn test
       shell: bash
