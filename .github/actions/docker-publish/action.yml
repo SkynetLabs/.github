@@ -23,9 +23,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    # Needed for calling the major-minor-version action
-    - uses: actions/checkout@v3
-
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
 
@@ -37,7 +34,7 @@ runs:
 
     - name: Generate Docker Versions
       id: docker_version
-      uses: ./.github/actions/major-minor-version
+      uses: SkynetLabs/.github/.github/actions/major-minor-version@master
       with:
         version: ${{ inputs.semver_version }}
         docker_repository: ${{ inputs.docker_repository }}
@@ -45,7 +42,6 @@ runs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v3
       with:
-        context: .
         push: true
         tags: |
           ${{ steps.docker_version.outputs.latest_image_tag }}
