@@ -1,4 +1,6 @@
 <!--
+Please read and fill out this form before submitting your PR.
+
 IMPORTANT:
 Before continuing, please make sure that your commits are signed!
 Setting up signing commits:
