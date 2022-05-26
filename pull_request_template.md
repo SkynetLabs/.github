@@ -2,11 +2,12 @@
 Please read and fill out this form before submitting your PR.
 
 IMPORTANT:
-Before continuing, please make sure that your commits are signed!
-Setting up signing commits:
-https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits
-Signing existing commits:
-https://superuser.com/a/1123928/664691
+Before continuing, please make sure that ALL your commits are signed!
+- Setting up signing commits:
+  https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits
+- Signing existing commits:
+  https://superuser.com/a/1123928/664691
+- If that doesn't work, squash your commits and force push one signed commit.
 -->
 
 # PULL REQUEST
