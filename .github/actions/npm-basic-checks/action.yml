@@ -7,6 +7,11 @@ inputs:
   node-version:
     required: true
     description: "the node version"
+  build:
+    required: false
+    type: boolean
+    description: "enables the build step"
+    default: false
 
 runs:
   using: "composite"
@@ -22,7 +27,8 @@ runs:
       shell: bash
     - run: npm run lint
       shell: bash
-    - run: npm run build
+    - if: ${{ inputs.build == 'true' }}
+      run: npm run build
       shell: bash
     - run: npm run test
       shell: bash

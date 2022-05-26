@@ -7,6 +7,11 @@ inputs:
   node-version:
     required: true
     description: "the node version"
+  build:
+    required: false
+    type: boolean
+    description: "enables the build step"
+    default: false
 
 runs:
   using: "composite"
@@ -23,7 +28,8 @@ runs:
       shell: bash
     - run: yarn lint
       shell: bash
-    - run: yarn build
+    - if: ${{ inputs.build == 'true' }}
+      run: yarn build
       shell: bash
     - run: yarn test
       shell: bash
