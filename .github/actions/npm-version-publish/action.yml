@@ -7,7 +7,7 @@ inputs:
   npm-token:
     required: true
     description: "your NPM token for authorizing publishes"
-  version:
+  version-bump:
     required: false
     description: "major, minor, or patch version bump"
     default: "patch"
@@ -32,7 +32,7 @@ runs:
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
       with:
-        default: ${{ inputs.version }}
+        default: ${{ inputs.version-bump }}
         tag-prefix: ${{ inputs.tag-prefix }}
         PACKAGEJSON_DIR: ${{ inputs.package_dir }}
         # Always bump regardless of whether bumps included in commit messages.
@@ -43,3 +43,8 @@ runs:
         token: ${{ inputs.npm-token }}
         package: "${{ inputs.package_dir }}/package.json"
         access: "public"
+    - name: "Export version"
+      id: tag_version
+      run: |
+        echo ::set-output name=new_version::`cat package.json | jq -r .version`
+        shell: bash
