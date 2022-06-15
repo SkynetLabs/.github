@@ -7,7 +7,7 @@ inputs:
   npm-token:
     required: true
     description: "your NPM token for authorizing publishes"
-  version-bump:
+  version:
     required: false
     description: "major, minor, or patch version bump"
     default: "patch"
@@ -28,12 +28,11 @@ runs:
   using: "composite"
   steps:
     - name: "Bump version in package.json and push tag back to repo"
-      run: npm version ${{ inputs.version-bump }}
       uses: "phips28/gh-action-bump-version@master"
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
       with:
-        default: ${{ inputs.version-bump }}
+        default: ${{ inputs.version }}
         tag-prefix: ${{ inputs.tag-prefix }}
         PACKAGEJSON_DIR: ${{ inputs.package_dir }}
         # Always bump regardless of whether bumps included in commit messages.
