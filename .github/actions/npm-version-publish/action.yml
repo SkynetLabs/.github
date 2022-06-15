@@ -1,0 +1,46 @@
+name: "NPM Version Publish"
+description: "Bump the version, create a tag and publish to NPM"
+inputs:
+  github-token:
+    required: true
+    description: "your GITHUB_TOKEN"
+  npm-token:
+    required: true
+    description: "your NPM token for authorizing publishes"
+  version-bump:
+    required: false
+    description: "major, minor, or patch version bump"
+    default: "patch"
+  tag-prefix:
+    required: false
+    description: "prefix that is used for the git tag"
+    default: "v"
+  package_dir:
+    required: false
+    description: "param to parse the location of the desired package.json"
+    default: "."
+outputs:
+  new-version:
+    description: "new version created"
+    value: ${{ steps.tag_version.outputs.new_version }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Bump version in package.json and push tag back to repo"
+      run: npm version ${{ inputs.version-bump }}
+      uses: "phips28/gh-action-bump-version@master"
+      env:
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+      with:
+        default: ${{ inputs.version-bump }}
+        tag-prefix: ${{ inputs.tag-prefix }}
+        PACKAGEJSON_DIR: ${{ inputs.package_dir }}
+        # Always bump regardless of whether bumps included in commit messages.
+        bump-policy: "ignore"
+    - name: "Publish to NPM"
+      uses: "JS-DevTools/npm-publish@v1"
+      with:
+        token: ${{ inputs.npm-token }}
+        package: "${{ inputs.package_dir }}/package.json"
+        access: "public"
