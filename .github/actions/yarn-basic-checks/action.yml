@@ -28,10 +28,10 @@ runs:
         node-version: ${{ inputs.node-version }}
     - if: ${{ inputs.integration-tests == 'true' }}
       name: "Integration tests"
-      uses: cypress-io/github-action@v3
+      uses: cypress-io/github-action@v4
       env:
-        CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        CYPRESS_RECORD_KEY: ${{ secrets.GITHUB_TOKEN }}
       with:
         install: false
         record: true
