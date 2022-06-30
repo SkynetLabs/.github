@@ -12,6 +12,11 @@ inputs:
     type: boolean
     description: "enables the build step"
     default: false
+  integration-tests:
+    required: false
+    type: boolean
+    description: "Runs Cypress tests"
+    default: false
 
 runs:
   using: "composite"
@@ -21,6 +26,19 @@ runs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ inputs.node-version }}
+    - if: ${{ inputs.integration-tests == 'true' }}
+      name: "Integration tests"
+      uses: cypress-io/github-action@v3
+      env:
+        CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        install: false
+        record: true
+        start: yarn start
+        wait-on: http://localhost:8000
+        wait-on-timeout: 120
+        config: baseUrl=http://localhost:8000
     # Yarn equivalent of npm ci.
     - run: yarn install --frozen-lockfile
       shell: bash
