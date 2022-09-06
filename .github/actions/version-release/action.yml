@@ -1,5 +1,5 @@
 name: "Version Release"
-description: "Bump the version and create a release"
+description: "Bump the version and create a tag and release"
 inputs:
   github-token:
     required: true
